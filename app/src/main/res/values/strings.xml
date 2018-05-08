@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Baking App</string>
+    <string name="error_msg">An error has occurred. Please make sure you have internet access</string>
+    <string name="recipe_servings_description">Suitable for %1$d persons.</string>
+    <string name="title_recipestep_list">RecipeSteps</string>
+    <string name="title_recipestep_detail">RecipeStep Detail</string>
+    <string name="next_button_name">Next</string>
+    <string name="previous_button_name">previous</string>
+    <string name="appwidget_text">No recipes selected yet from the app</string>
+    <string name="add_widget">Add widget</string>
+    <string name="shared_preferences_file">nanodegree.udacity.bakingapp.sharedPreferencesKey</string>
+    <string name="saved_ingredients_key">saved-ingredients-key</string>
+</resources>
