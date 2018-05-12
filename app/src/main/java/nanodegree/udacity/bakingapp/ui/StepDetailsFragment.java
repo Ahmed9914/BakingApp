@@ -187,13 +187,28 @@ public class StepDetailsFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        if (Util.SDK_INT <= 23) {
+            releasePlayer();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (Util.SDK_INT > 23) {
+            releasePlayer();
+        }
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList(STEPS_SAVE, steps);
         outState.putInt(STEPS_INDEX_SAVE, stepIndex);
         outState.putInt(PLAYER_CURRENT_WINDOW, player.getCurrentWindowIndex());
         outState.putLong(PLAYER_POSITION, player.getCurrentPosition());
         outState.putBoolean(PLAYER_PLAY_WHEN_READY, player.getPlayWhenReady());
-        releasePlayer();
     }
 
 }
