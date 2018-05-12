@@ -18,7 +18,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import nanodegree.udacity.bakingapp.adapters.RecipesAdapter;
-import nanodegree.udacity.bakingapp.masterListComponents.RecipeComponentsListActivity;
+import nanodegree.udacity.bakingapp.ui.RecipeComponentsListActivity;
 import nanodegree.udacity.bakingapp.model.Recipe;
 import nanodegree.udacity.bakingapp.utils.NetworkUtils;
 

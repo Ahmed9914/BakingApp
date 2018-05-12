@@ -20,11 +20,21 @@
         </activity>
 
         <activity
-            android:name=".masterListComponents.RecipeComponentsListActivity"
-            android:label="@string/title_recipestep_list"></activity>
+            android:name=".ui.RecipeComponentsListActivity"
+            android:label="@string/title_recipestep_list"
+            android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" /></activity>
         <activity
-            android:name=".masterListComponents.StepDetailsActivity"
-            android:label="@string/title_recipestep_detail"></activity>
+            android:name=".ui.StepDetailsActivity"
+            android:label="@string/title_recipestep_detail"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.RecipeComponentsListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.RecipeComponentsListActivity" /></activity>
 
         <receiver android:name=".widget.RecipeIngredientsWidget">
             <intent-filter>

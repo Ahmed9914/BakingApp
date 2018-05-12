@@ -1,8 +1,10 @@
-package nanodegree.udacity.bakingapp.masterListComponents;
+package nanodegree.udacity.bakingapp.ui;
 
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -20,17 +22,20 @@ public class StepDetailsActivity extends AppCompatActivity {
     ArrayList<Step> steps;
     int stepIndex;
     public static ActionBar ab;
+    public static final String ACTIONBAR_TITLE = "actionbar-title";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        steps = getIntent().getParcelableArrayListExtra(RecipeComponentsListActivity.STEPS_LIST_KEY);
-        stepIndex = getIntent().getIntExtra(RecipeComponentsListActivity.STEP_INDEX_KEY, 0);
-        Step currentStep =  steps.get(stepIndex);
         setContentView(R.layout.activity_recipe_step_detail);
-        ab = getSupportActionBar();
-        if (ab!=null) ab.setTitle(currentStep.getShortDescription());
-        if (savedInstanceState == null) {
+
+        if (savedInstanceState != null && savedInstanceState.getString(ACTIONBAR_TITLE) != null) {
+            ab = getSupportActionBar();
+            if (ab!=null) {
+                ab.setTitle(savedInstanceState.getString(ACTIONBAR_TITLE));
+                ab.setDisplayHomeAsUpEnabled(true);
+            }
+        } else {
 
             // savedInstanceState is non-null when there is fragment state
             // saved from previous configurations of this activity
@@ -41,6 +46,15 @@ public class StepDetailsActivity extends AppCompatActivity {
             //
             // http://developer.android.com/guide/components/fragments.html
             //
+            steps = getIntent().getParcelableArrayListExtra(RecipeComponentsListActivity.STEPS_LIST_KEY);
+            stepIndex = getIntent().getIntExtra(RecipeComponentsListActivity.STEP_INDEX_KEY, 0);
+            Step currentStep =  steps.get(stepIndex);
+            ab = getSupportActionBar();
+            if (ab!=null) {
+                ab.setTitle(currentStep.getShortDescription());
+                ab.setDisplayHomeAsUpEnabled(true);
+            }
+
             StepDetailsFragment fragment = new StepDetailsFragment();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.recipe_step_detail_container, fragment)
@@ -51,5 +65,23 @@ public class StepDetailsActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(ACTIONBAR_TITLE, ab.getTitle().toString());
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

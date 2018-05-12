@@ -1,15 +1,12 @@
-package nanodegree.udacity.bakingapp.masterListComponents;
+package nanodegree.udacity.bakingapp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import nanodegree.udacity.bakingapp.R;
 import nanodegree.udacity.bakingapp.MainActivity;
 import nanodegree.udacity.bakingapp.model.Recipe;
@@ -42,7 +39,10 @@ public class RecipeComponentsListActivity extends AppCompatActivity implements R
         setContentView(R.layout.activity_recipe_steps_list);
 
         ActionBar ab = getSupportActionBar();
-        if (ab != null) ab.setTitle(recipe.getName());
+        if (ab != null) {
+            ab.setTitle(recipe.getName());
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
 
         if (getResources().getBoolean(R.bool.isTablet)) {
             mTwoPane = true;
@@ -78,5 +78,16 @@ public class RecipeComponentsListActivity extends AppCompatActivity implements R
             startActivity(intent);
         }
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

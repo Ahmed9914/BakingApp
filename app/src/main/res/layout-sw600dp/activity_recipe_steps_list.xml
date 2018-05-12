@@ -8,13 +8,13 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context=".masterListComponents.RecipeComponentsListActivity">
+    tools:context=".ui.RecipeComponentsListActivity">
 
     <fragment
         android:id="@+id/recipe_steps_master_fragment"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:name="nanodegree.udacity.bakingapp.masterListComponents.RecipeComponentsListFragment"
+        android:name="nanodegree.udacity.bakingapp.ui.RecipeComponentsListFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"/>
