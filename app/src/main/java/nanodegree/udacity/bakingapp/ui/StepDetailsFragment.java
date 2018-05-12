@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -38,8 +40,8 @@ import nanodegree.udacity.bakingapp.model.Step;
  * on handsets.
  */
 public class StepDetailsFragment extends Fragment {
-
     @BindView(R.id.step_full_description_tv) TextView stepDescriptionTV;
+    @BindView(R.id.step_iv) ImageView stepIV;
     @BindView(R.id.video_view) SimpleExoPlayerView videoPlayerView;
     @BindView(R.id.next_button) Button next_button;
     @BindView(R.id.prev_button) Button prev_button;
@@ -83,6 +85,9 @@ public class StepDetailsFragment extends Fragment {
         currentStep = steps.get(stepIndex);
         if (currentStep != null) {
             stepDescriptionTV.setText(currentStep.getDescription());
+            if (currentStep.getThumbnailURL() !=null && !currentStep.getThumbnailURL().equals("")){
+                Picasso.with(getContext()).load(currentStep.getThumbnailURL()).into(stepIV);
+            }
             stepVideoUrl = currentStep.getVideoURL();
             if (areButtonsVisible) {
                 next_button.setOnClickListener(new View.OnClickListener() {
@@ -121,6 +126,9 @@ public class StepDetailsFragment extends Fragment {
     void nextPreviousNavigate(Step chosenStep){
         StepDetailsActivity.ab.setTitle(chosenStep.getShortDescription());
         stepDescriptionTV.setText(chosenStep.getDescription());
+        if (chosenStep.getThumbnailURL() !=null && !chosenStep.getThumbnailURL().equals("")){
+            Picasso.with(getContext()).load(chosenStep.getThumbnailURL()).into(stepIV);
+        }
         stepVideoUrl = chosenStep.getVideoURL();
         player = null;
         playbackPosition = 0;
@@ -206,9 +214,9 @@ public class StepDetailsFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList(STEPS_SAVE, steps);
         outState.putInt(STEPS_INDEX_SAVE, stepIndex);
-        outState.putInt(PLAYER_CURRENT_WINDOW, player.getCurrentWindowIndex());
-        outState.putLong(PLAYER_POSITION, player.getCurrentPosition());
-        outState.putBoolean(PLAYER_PLAY_WHEN_READY, player.getPlayWhenReady());
+        outState.putInt(PLAYER_CURRENT_WINDOW, currentWindow);
+        outState.putLong(PLAYER_POSITION, playbackPosition);
+        outState.putBoolean(PLAYER_PLAY_WHEN_READY, playWhenReady);
     }
 
 }

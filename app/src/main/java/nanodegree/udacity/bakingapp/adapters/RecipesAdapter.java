@@ -10,6 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -48,6 +50,10 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
         holder.servingsTV.setText(
                 context.getString(R.string.recipe_servings_description, recipes.get(position).getServings())
         );
+        if (recipes.get(position).getImageLink()!=null && !recipes.get(position).getImageLink().equals("")) {
+            Picasso.with(context).load(recipes.get(position).getImageLink()).into(holder.recipeIV);
+        }
+
     }
 
     @Override
@@ -64,6 +70,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
     public class RecipesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @BindView(R.id.recipe_name_tv) TextView recipeTV;
         @BindView(R.id.recipe_servings_tv) TextView servingsTV;
+        @BindView(R.id.recipe_iv) ImageView recipeIV;
 
     public RecipesViewHolder(View itemView) {
         super(itemView);
