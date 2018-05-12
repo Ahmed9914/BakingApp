@@ -52,7 +52,7 @@ public class StepDetailsFragment extends Fragment {
     public static final String STEPS_INDEX_SAVE = "step-index";
     public static final String PLAYER_POSITION = "player-position";
     public static final String PLAYER_PLAY_WHEN_READY = "play-when-ready";
-    public static final String PLAYER_CURRENT_WINDOW = "play-when-ready";
+    public static final String PLAYER_CURRENT_WINDOW = "player-current-window";
     private SimpleExoPlayer player;
     private long playbackPosition;
     private int currentWindow;
