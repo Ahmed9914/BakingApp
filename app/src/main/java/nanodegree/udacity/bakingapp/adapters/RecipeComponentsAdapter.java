@@ -85,7 +85,7 @@ public class RecipeComponentsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemCount() {
-        return steps.size();
+        return steps.size()+1;
     }
 
     @Override
